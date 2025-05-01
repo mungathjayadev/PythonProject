@@ -8,6 +8,7 @@ class SudokuGUI:
         self.entries = [[None for _ in range(9)] for _ in range(9)]
         self.create_grid()
         self.create_buttons()
+        self.create_buttonsm()
 
     def create_grid(self):
         for row in range(9):
@@ -19,6 +20,12 @@ class SudokuGUI:
     def create_buttons(self):
         solve_btn = tk.Button(self.root, text="Solve", command=self.solve)
         solve_btn.grid(row=9, column=3, columnspan=3, pady=10)
+        
+    def create_buttonsm(self):
+        reset = tk.Button(self.root, text="Reset", command=self.reset)
+        reset.grid(row=9, column=4, columnspan=5, pady=15)
+        
+
 
     def get_board(self):
         board = []
@@ -50,6 +57,12 @@ class SudokuGUI:
                 if board[i][j] == 0:
                     return i, j
         return None
+    
+    def reset(self):
+        for i in range(9):
+            for j in range(9):
+                self.entries[i][j].delete(0, tk.END)
+        
 
     def is_valid(self, board, num, pos):
         row, col = pos
